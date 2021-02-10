@@ -9,40 +9,48 @@ class CustomAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.fromLTRB(24.0, 24.0, 12.0, 0.0),
+      color: Palette.scaffold,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Row(
-            children: [
-              ProfileAvatar(
-                imgUrl: this.imgUrl,
+          Container(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24.0),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  ProfileAvatar(
+                    imgUrl: this.imgUrl,
+                  ),
+                  const SizedBox(
+                    width: 12.0,
+                  ),
+                  Expanded(
+                    child: Text(
+                      "Hi, User",
+                      style: const TextStyle(
+                          color: Palette.primary,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 25.0),
+                    ),
+                  ),
+                  MaterialButton(
+                    onPressed: () {},
+                    color: Palette.primary,
+                    elevation: 0.0,
+                    minWidth: 0.0,
+                    textColor: Colors.white,
+                    child: Icon(
+                      Icons.add,
+                      size: 32,
+                    ),
+                    padding: EdgeInsets.all(8),
+                    shape: CircleBorder(),
+                  )
+                ],
               ),
-              const SizedBox(
-                width: 12.0,
-              ),
-              Expanded(
-                child: Text(
-                  "Hi, User",
-                  style: const TextStyle(
-                      color: Palette.primary,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 25.0),
-                ),
-              ),
-              MaterialButton(
-                onPressed: () {},
-                // color: Colors.blue,
-                textColor: Palette.primary,
-                child: Icon(
-                  Icons.notifications,
-                  size: 32,
-                ),
-                padding: EdgeInsets.all(8),
-                shape: CircleBorder(),
-              )
-            ],
-          )
+            ),
+          ),
         ],
       ),
     );

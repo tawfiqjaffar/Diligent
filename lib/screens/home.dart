@@ -49,9 +49,11 @@ class _HomeScreenState extends State<HomeScreen> {
     return DefaultTabController(
       length: _icons.length,
       child: Scaffold(
-        body: IndexedStack(
-          index: _selectedIndex,
-          children: _screens,
+        body: SafeArea(
+          child: IndexedStack(
+            index: _selectedIndex,
+            children: _screens,
+          ),
         ),
         bottomNavigationBar: Container(
           padding: const EdgeInsets.only(bottom: 12.0),
