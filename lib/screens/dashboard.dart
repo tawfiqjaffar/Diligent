@@ -1,3 +1,4 @@
+import 'package:Diligent/widgets/dashboard_stats.dart';
 import 'package:Diligent/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
@@ -5,7 +6,6 @@ class Dashboard extends StatelessWidget {
   final searchTextFieldEditingController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    final double screenHeight = MediaQuery.of(context).size.height;
     return GestureDetector(
       onTap: () => {
         FocusScope.of(context).unfocus(),
@@ -37,29 +37,17 @@ class Dashboard extends StatelessWidget {
             ),
           ),
           SliverPadding(
-            padding: const EdgeInsets.only(top: 24.0),
+            padding: const EdgeInsets.only(top: 32.0),
             sliver: SliverToBoxAdapter(
-              child: Stats(),
+              child: DashboardStats(),
             ),
           ),
           SliverPadding(
-            padding: const EdgeInsets.only(top: 24.0),
+            padding: const EdgeInsets.only(top: 32.0),
             sliver: SliverToBoxAdapter(
-              child: Stats(),
+              child: DashboardToday(),
             ),
           ),
-          SliverPadding(
-            padding: const EdgeInsets.only(top: 24.0),
-            sliver: SliverToBoxAdapter(
-              child: Stats(),
-            ),
-          ),
-          SliverPadding(
-            padding: const EdgeInsets.only(top: 24.0),
-            sliver: SliverToBoxAdapter(
-              child: Stats(),
-            ),
-          )
         ],
       ),
     );

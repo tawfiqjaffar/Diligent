@@ -42,7 +42,7 @@ class CustomAppBar extends StatelessWidget {
                     textColor: Colors.white,
                     child: Icon(
                       Icons.add,
-                      size: 32,
+                      size: 30,
                     ),
                     padding: EdgeInsets.all(8),
                     shape: CircleBorder(),
