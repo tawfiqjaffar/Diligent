@@ -44,7 +44,7 @@ class _ListItem extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.fromLTRB(8.0, (!isFirst) ? 16.0 : 0.0, 8.0, 0.0),
       child: Container(
-        height: 100,
+        height: 80,
         decoration: BoxDecoration(
           color: Colors.grey[100],
           boxShadow: Style.cardShadow,
@@ -53,29 +53,104 @@ class _ListItem extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24.0),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Text(
-                "Activity",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Palette.secondary,
-                  fontSize: 22.0,
+              Container(
+                child: ProfileAvatar(
+                  imgUrl:
+                      "https://assets.materialup.com/uploads/5cda2c2f-9596-403f-946f-f72e70c8e94a/preview.png",
                 ),
               ),
-              Text(
-                "Project",
-                style: TextStyle(
-                  fontSize: 22.0,
+              const SizedBox(
+                width: 16.0,
+              ),
+              Expanded(
+                child: Container(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "ddocdfasdfr",
+                        textAlign: TextAlign.start,
+                        style: const TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 15.0),
+                      ),
+                      Text(
+                        "DevOps",
+                        style: TextStyle(color: Colors.grey[600]),
+                        textAlign: TextAlign.start,
+                      ),
+                    ],
+                  ),
                 ),
               ),
-              Text(
-                "Test",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 22.0,
+              const SizedBox(
+                width: 16.0,
+              ),
+              Expanded(
+                child: Container(
+                  child: Text(
+                    "DevOps",
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
               ),
+              const SizedBox(
+                width: 16.0,
+              ),
+              Container(
+                child: Row(
+                  children: [
+                    Material(
+                      child: InkWell(
+                        customBorder: CircleBorder(),
+                        onTap: () {
+                          print("no");
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle, color: Colors.green),
+                          child: Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: Icon(
+                              Icons.check,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 8.0,
+                    ),
+                    Material(
+                      child: InkWell(
+                        customBorder: CircleBorder(),
+                        onTap: () {
+                          print("no");
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(color: Colors.red, width: 2.0),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: Icon(
+                              Icons.close,
+                              color: Colors.red,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              )
             ],
           ),
         ),

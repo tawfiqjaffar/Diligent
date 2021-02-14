@@ -68,7 +68,7 @@ class _ListItem extends StatelessWidget {
         width: dimension,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(dimension / 4)),
-          boxShadow: Style.containerShadow,
+          boxShadow: Style.cardShadow,
           gradient: LinearGradient(
             begin: Alignment.topRight,
             end: Alignment.bottomLeft,

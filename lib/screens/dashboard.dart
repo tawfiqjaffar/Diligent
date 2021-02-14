@@ -48,6 +48,7 @@ class Dashboard extends StatelessWidget {
               child: DashboardToday(),
             ),
           ),
+          SliverPadding(padding: const EdgeInsets.only(bottom: 16.0))
         ],
       ),
     );
