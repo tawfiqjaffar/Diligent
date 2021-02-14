@@ -15,6 +15,7 @@ class DashboardTodayTest implements DashboardTodayDelegate {
 
 void main() {
   test('Tests correct project name retrieval', () {
+    // GIVEN
     final Activity activity = Activity(
       projectId: 0,
       id: 0,
@@ -25,7 +26,11 @@ void main() {
     final dashboardToday = DashboardTodayTest();
     final presenter = DashboardTodayPresenter();
     presenter.delegate = dashboardToday;
+
+    // WHEN
     presenter.displayProjectNameFromActivity(activity, [project]);
+
+    // THEN
     expect(dashboardToday.projectName, "Project0");
   });
 
