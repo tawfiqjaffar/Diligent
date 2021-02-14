@@ -1,11 +1,12 @@
-import 'package:Diligent/data/projects.dart';
 import 'package:Diligent/models/activity.dart';
+import 'package:Diligent/models/project.dart';
 import 'package:Diligent/presenters/delegates/dashboard_today_delegate.dart';
 
 class DashboardTodayPresenter {
   DashboardTodayDelegate delegate;
 
-  void displayProjectNameFromActivity(Activity activity) {
+  void displayProjectNameFromActivity(
+      Activity activity, List<Project> projects) {
     final int projectId = activity.projectId;
     final project = projects.firstWhere(
       (element) => element.id == projectId,

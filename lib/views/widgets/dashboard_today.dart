@@ -1,6 +1,8 @@
 import 'package:Diligent/config/style.dart';
 import 'package:Diligent/data/activities.dart';
+import 'package:Diligent/data/projects.dart';
 import 'package:Diligent/models/activity.dart';
+import 'package:Diligent/models/project.dart';
 import 'package:Diligent/presenters/dashboard_today_presenter.dart';
 import 'package:Diligent/presenters/delegates/dashboard_today_delegate.dart';
 import 'package:flutter/material.dart';
@@ -55,12 +57,17 @@ class _ListItem extends StatefulWidget {
 class __ListItemState extends State<_ListItem>
     implements DashboardTodayDelegate {
   String _projectName = "";
+  final List<Project> _projects = [];
 
   @override
   void initState() {
     super.initState();
     this.widget.presenter.delegate = this;
-    this.widget.presenter.displayProjectNameFromActivity(this.widget.activity);
+    this.getProjects();
+    this
+        .widget
+        .presenter
+        .displayProjectNameFromActivity(this.widget.activity, this._projects);
   }
 
   @override
@@ -181,6 +188,13 @@ class __ListItemState extends State<_ListItem>
         ),
       ),
     );
+  }
+
+  void getProjects() {
+    setState(() {
+      this._projects.clear();
+      this._projects.addAll(projects);
+    });
   }
 
   @override
