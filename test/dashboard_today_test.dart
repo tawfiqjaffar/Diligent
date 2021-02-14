@@ -35,6 +35,7 @@ void main() {
   });
 
   test('Tests incorrect project name retrieval', () {
+    // GIVEN
     final Activity activity = Activity(
       projectId: 1,
       id: 0,
@@ -45,7 +46,11 @@ void main() {
     final dashboardToday = DashboardTodayTest();
     final presenter = DashboardTodayPresenter();
     presenter.delegate = dashboardToday;
+
+    // WHEN
     presenter.displayProjectNameFromActivity(activity, [project]);
+
+    // THEN
     expect(dashboardToday.projectName, "n/a");
   });
 }
