@@ -1,8 +1,9 @@
 import 'package:Diligent/config/palette.dart';
 import 'package:Diligent/config/style.dart';
-import 'package:Diligent/widgets/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import 'widgets.dart';
 
 class DashboardStats extends StatelessWidget {
   @override

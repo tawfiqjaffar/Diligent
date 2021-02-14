@@ -1,6 +1,7 @@
 import 'package:Diligent/config/palette.dart';
-import 'package:Diligent/screens/home.dart';
 import 'package:flutter/material.dart';
+
+import 'views/screens/screens.dart';
 
 void main() {
   runApp(MyApp());

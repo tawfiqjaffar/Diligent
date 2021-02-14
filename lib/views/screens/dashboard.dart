@@ -1,5 +1,4 @@
-import 'package:Diligent/widgets/dashboard_stats.dart';
-import 'package:Diligent/widgets/widgets.dart';
+import 'package:Diligent/views/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
 class Dashboard extends StatelessWidget {

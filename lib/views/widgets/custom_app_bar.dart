@@ -1,6 +1,7 @@
 import 'package:Diligent/config/palette.dart';
-import 'package:Diligent/widgets/profile_avatar.dart';
 import 'package:flutter/material.dart';
+
+import 'widgets.dart';
 
 class CustomAppBar extends StatelessWidget {
   final String imgUrl;

@@ -1,7 +1,11 @@
-import 'package:Diligent/config/palette.dart';
 import 'package:Diligent/config/style.dart';
-import 'package:Diligent/widgets/widgets.dart';
+import 'package:Diligent/data/activities.dart';
+import 'package:Diligent/models/activity.dart';
+import 'package:Diligent/presenters/dashboard_today_presenter.dart';
+import 'package:Diligent/presenters/delegates/dashboard_today_delegate.dart';
 import 'package:flutter/material.dart';
+
+import 'widgets.dart';
 
 class DashboardToday extends StatelessWidget {
   List<Widget> getTodaysActivities() {
@@ -9,18 +13,15 @@ class DashboardToday extends StatelessWidget {
       DashboardHeading(text: "Today"),
       SizedBox(height: 16.0),
     ];
-    var colors = [
-      Colors.red,
-      Colors.black,
-      Colors.blue,
-      Colors.purple,
-      Colors.purple
-    ];
-    for (var i = 0; i < 10; ++i) {
+    var isFirst = true;
+    cProgActivities.forEach((element) {
       listItems.add(_ListItem(
-        isFirst: i == 0,
+        isFirst: isFirst,
+        activity: element,
+        presenter: DashboardTodayPresenter(),
       ));
-    }
+      isFirst = false;
+    });
     return listItems;
   }
 
@@ -35,14 +36,38 @@ class DashboardToday extends StatelessWidget {
   }
 }
 
-class _ListItem extends StatelessWidget {
+class _ListItem extends StatefulWidget {
   final bool isFirst;
+  final Activity activity;
+  final DashboardTodayPresenter presenter;
 
-  const _ListItem({Key key, this.isFirst = false}) : super(key: key);
+  const _ListItem({
+    Key key,
+    this.isFirst = false,
+    @required this.activity,
+    @required this.presenter,
+  }) : super(key: key);
+
+  @override
+  __ListItemState createState() => __ListItemState();
+}
+
+class __ListItemState extends State<_ListItem>
+    implements DashboardTodayDelegate {
+  String _projectName = "";
+
+  @override
+  void initState() {
+    super.initState();
+    this.widget.presenter.delegate = this;
+    this.widget.presenter.displayProjectNameFromActivity(this.widget.activity);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.fromLTRB(8.0, (!isFirst) ? 16.0 : 0.0, 8.0, 0.0),
+      padding:
+          EdgeInsets.fromLTRB(8.0, (!widget.isFirst) ? 16.0 : 0.0, 8.0, 0.0),
       child: Container(
         height: 80,
         decoration: BoxDecoration(
@@ -71,13 +96,13 @@ class _ListItem extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "ddocdfasdfr",
+                        this.widget.activity.label,
                         textAlign: TextAlign.start,
                         style: const TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 15.0),
                       ),
                       Text(
-                        "DevOps",
+                        _projectName,
                         style: TextStyle(color: Colors.grey[600]),
                         textAlign: TextAlign.start,
                       ),
@@ -156,5 +181,12 @@ class _ListItem extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  @override
+  void displayProjectName(String projectName) {
+    setState(() {
+      this._projectName = projectName;
+    });
   }
 }
