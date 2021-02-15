@@ -1,7 +1,6 @@
-import 'package:Diligent/data/projects.dart';
 import 'package:Diligent/models/activity.dart';
 import 'package:Diligent/models/project.dart';
-import 'package:Diligent/presenters/dashboard_today_presenter.dart';
+import 'package:Diligent/presenters/presenters/dashboard_today_presenter.dart';
 import 'package:Diligent/presenters/delegates/delegates.dart';
 import 'package:flutter_test/flutter_test.dart';
 

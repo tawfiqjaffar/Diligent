@@ -1,4 +1,3 @@
-import 'package:Diligent/config/palette.dart';
 import 'package:flutter/material.dart';
 
 class Style {

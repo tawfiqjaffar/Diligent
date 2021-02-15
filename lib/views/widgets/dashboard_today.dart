@@ -3,7 +3,7 @@ import 'package:Diligent/data/activities.dart';
 import 'package:Diligent/data/projects.dart';
 import 'package:Diligent/models/activity.dart';
 import 'package:Diligent/models/project.dart';
-import 'package:Diligent/presenters/dashboard_today_presenter.dart';
+import 'package:Diligent/presenters/presenters/dashboard_today_presenter.dart';
 import 'package:Diligent/presenters/delegates/dashboard_today_delegate.dart';
 import 'package:flutter/material.dart';
 
