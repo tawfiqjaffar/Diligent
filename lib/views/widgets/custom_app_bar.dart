@@ -1,4 +1,5 @@
 import 'package:Diligent/config/palette.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:popover/popover.dart';
 
@@ -38,16 +39,40 @@ class CustomAppBar extends StatelessWidget {
                   ),
                   MaterialButton(
                     onPressed: () {
-                      showPopover(
-                        context: context,
-                        bodyBuilder: (context) => const ListItems(),
-                        onPop: () => print('Popover was popped!'),
-                        direction: PopoverDirection.bottom,
-                        height: 190,
-                        width: 200,
-                        arrowHeight: 15,
-                        arrowWidth: 30,
-                      );
+                      final act = CupertinoActionSheet(
+                          title: Text('What would you like to create?'),
+                          actions: [
+                            CupertinoActionSheetAction(
+                              child: Text('Activity'),
+                              onPressed: () {
+                                print('pressed action');
+                                Navigator.pop(context);
+                              },
+                            ),
+                            CupertinoActionSheetAction(
+                              child: Text('Project'),
+                              onPressed: () {
+                                print('pressed project');
+                                Navigator.pop(context);
+                              },
+                            ),
+                            CupertinoActionSheetAction(
+                              child: Text('Idea'),
+                              onPressed: () {
+                                print('pressed idea');
+                                Navigator.pop(context);
+                              },
+                            )
+                          ],
+                          cancelButton: CupertinoActionSheetAction(
+                            child: Text('Cancel'),
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                          ));
+                      showCupertinoModalPopup(
+                          context: context,
+                          builder: (BuildContext context) => act);
                     },
                     color: Palette.primary,
                     elevation: 0.0,
