@@ -61,7 +61,6 @@ class _ListItem extends StatefulWidget {
 
 class __ListItemState extends State<_ListItem>
     implements DashboardTodayDelegate {
-  String _projectName = "";
   final List<Project> _projects = [];
 
   @override
@@ -145,6 +144,7 @@ class __ListItemState extends State<_ListItem>
                 child: Row(
                   children: [
                     Material(
+                      color: Colors.transparent,
                       child: InkWell(
                         customBorder: CircleBorder(),
                         onTap: () {
@@ -152,7 +152,9 @@ class __ListItemState extends State<_ListItem>
                         },
                         child: Container(
                           decoration: BoxDecoration(
-                              shape: BoxShape.circle, color: Colors.green),
+                            shape: BoxShape.circle,
+                            color: Colors.green,
+                          ),
                           child: Padding(
                             padding: const EdgeInsets.all(5.0),
                             child: Icon(
@@ -167,6 +169,7 @@ class __ListItemState extends State<_ListItem>
                       width: 8.0,
                     ),
                     Material(
+                      color: Colors.transparent,
                       child: InkWell(
                         customBorder: CircleBorder(),
                         onTap: () {
@@ -206,8 +209,6 @@ class __ListItemState extends State<_ListItem>
 
   @override
   void displayProjectName(String projectName) {
-    setState(() {
-      this._projectName = projectName;
-    });
+    setState(() {});
   }
 }
