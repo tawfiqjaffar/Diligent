@@ -21,7 +21,7 @@ void main() {
       label: "Activity0",
       start: DateTime.now(),
     );
-    final project = Project(id: 0, label: "Project0");
+    final project = Project(id: 0, label: "Project0", activities: []);
     final dashboardToday = DashboardTodayTest();
     final presenter = DashboardTodayPresenter();
     presenter.delegate = dashboardToday;
@@ -41,7 +41,7 @@ void main() {
       label: "Activity0",
       start: DateTime.now(),
     );
-    final project = Project(id: 0, label: "Project0");
+    final project = Project(id: 0, label: "Project0", activities: []);
     final dashboardToday = DashboardTodayTest();
     final presenter = DashboardTodayPresenter();
     presenter.delegate = dashboardToday;

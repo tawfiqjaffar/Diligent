@@ -16,13 +16,16 @@ class DashboardToday extends StatelessWidget {
       SizedBox(height: 16.0),
     ];
     var isFirst = true;
-    cProgActivities.forEach((element) {
-      listItems.add(_ListItem(
-        isFirst: isFirst,
-        activity: element,
-        presenter: DashboardTodayPresenter(),
-      ));
-      isFirst = false;
+    projects.forEach((el) {
+      el.activities.forEach((act) {
+        listItems.add(_ListItem(
+          activity: act,
+          project: el,
+          presenter: DashboardTodayPresenter(),
+          isFirst: isFirst,
+        ));
+        isFirst = false;
+      });
     });
     return listItems;
   }
@@ -41,6 +44,7 @@ class DashboardToday extends StatelessWidget {
 class _ListItem extends StatefulWidget {
   final bool isFirst;
   final Activity activity;
+  final Project project;
   final DashboardTodayPresenter presenter;
 
   const _ListItem({
@@ -48,6 +52,7 @@ class _ListItem extends StatefulWidget {
     this.isFirst = false,
     @required this.activity,
     @required this.presenter,
+    this.project,
   }) : super(key: key);
 
   @override
@@ -64,10 +69,10 @@ class __ListItemState extends State<_ListItem>
     super.initState();
     this.widget.presenter.delegate = this;
     this.getProjects();
-    this
-        .widget
-        .presenter
-        .displayProjectNameFromActivity(this.widget.activity, this._projects);
+    // this
+    //     .widget
+    //     .presenter
+    //     .displayProjectNameFromActivity(this.widget.activity, this._projects);
   }
 
   @override
@@ -106,10 +111,12 @@ class __ListItemState extends State<_ListItem>
                         this.widget.activity.label,
                         textAlign: TextAlign.start,
                         style: const TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 15.0),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15.0,
+                        ),
                       ),
                       Text(
-                        _projectName,
+                        this.widget.project.label,
                         style: TextStyle(color: Colors.grey[600]),
                         textAlign: TextAlign.start,
                       ),

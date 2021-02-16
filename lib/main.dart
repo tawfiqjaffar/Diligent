@@ -1,4 +1,5 @@
 import 'package:Diligent/config/palette.dart';
+import 'package:Diligent/presenters/presenters/presenters.dart';
 import 'package:flutter/material.dart';
 
 import 'views/screens/screens.dart';
@@ -17,7 +18,9 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,
           scaffoldBackgroundColor: Palette.scaffold),
-      home: HomeScreen(),
+      home: HomeScreen(
+        presenter: HomePresenter(),
+      ),
     );
   }
 }
