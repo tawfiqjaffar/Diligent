@@ -1,5 +1,6 @@
+import 'package:Diligent/models/models.dart';
 import 'package:Diligent/presenters/delegates/delegate.dart';
 
-abstract class DashboardTodayDelegate extends Delegate {
-  void displayProjectName(String projectName);
+abstract class DashboardTodayDelegate implements Delegate {
+  void displayTodaysProjectActivities(List<Project> today);
 }

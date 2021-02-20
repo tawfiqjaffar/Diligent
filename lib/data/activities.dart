@@ -5,7 +5,7 @@ final List<Activity> cProgActivities = [
       id: 0,
       projectId: 0,
       label: "Introduction",
-      start: DateTime(2021, 2, 14, 12, 30)),
+      start: DateTime(2021, 2, 20, 12, 30)),
   Activity(
       id: 1,
       projectId: 0,
@@ -36,4 +36,12 @@ final List<Activity> cProgActivities = [
       projectId: 0,
       label: "strncmp",
       start: DateTime(2021, 2, 14, 18, 30)),
+];
+
+final List<Activity> cPPProgActivities = [
+  Activity(
+      id: 0,
+      projectId: 1,
+      label: "Introduction",
+      start: DateTime(2021, 2, 14, 30)),
 ];

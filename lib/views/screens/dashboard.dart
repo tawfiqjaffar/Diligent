@@ -1,3 +1,4 @@
+import 'package:Diligent/presenters/presenters/dashboard_today_presenter.dart';
 import 'package:Diligent/views/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
@@ -44,7 +45,9 @@ class Dashboard extends StatelessWidget {
           SliverPadding(
             padding: const EdgeInsets.only(top: 32.0),
             sliver: SliverToBoxAdapter(
-              child: DashboardToday(),
+              child: DashboardToday(
+                presenter: DashboardTodayPresenter(),
+              ),
             ),
           ),
           SliverPadding(padding: const EdgeInsets.only(bottom: 16.0))
