@@ -10,7 +10,7 @@ final List<Activity> cProgActivities = [
       id: 1,
       projectId: 0,
       label: "putchar",
-      start: DateTime(2021, 2, 14, 14, 00)),
+      start: DateTime(2022, 2, 14, 14, 00)),
   Activity(
       id: 2,
       projectId: 0,
@@ -43,5 +43,5 @@ final List<Activity> cPPProgActivities = [
       id: 0,
       projectId: 1,
       label: "Introduction",
-      start: DateTime(2021, 2, 14, 30)),
+      start: DateTime(2022, 2, 14, 30)),
 ];

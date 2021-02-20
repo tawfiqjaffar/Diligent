@@ -8,6 +8,10 @@ class DateTimeHelper {
         today.day == dateTime.day;
   }
 
+  static bool isFuture(DateTime dateTime) {
+    return dateTime.isAfter(DateTime.now());
+  }
+
   static String formatToReadable(DateTime dateTime) {
     final DateFormat formatter = DateFormat('MMM dd, yyyy');
     final String formatted = formatter.format(dateTime);

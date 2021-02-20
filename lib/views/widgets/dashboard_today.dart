@@ -1,10 +1,8 @@
 import 'package:Diligent/data/projects.dart';
-import 'package:Diligent/models/activity.dart';
 import 'package:Diligent/models/project.dart';
 import 'package:Diligent/presenters/delegates/dashboard_today_delegate.dart';
 import 'package:Diligent/presenters/presenters/activity_row_presenter.dart';
 import 'package:Diligent/presenters/presenters/dashboard_today_presenter.dart';
-import 'package:Diligent/utils/date_time.dart';
 import 'package:flutter/material.dart';
 
 import 'widgets.dart';
