@@ -1,4 +1,3 @@
-import 'package:Diligent/models/activity.dart';
 import 'package:Diligent/models/project.dart';
 import 'package:Diligent/presenters/delegates/dashboard_today_delegate.dart';
 import 'package:Diligent/presenters/delegates/delegate.dart';

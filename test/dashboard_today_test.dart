@@ -5,15 +5,17 @@ import 'package:Diligent/presenters/delegates/delegates.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 class DashboardTodayTest implements DashboardTodayDelegate {
-  String projectName;
+  final List<Project> projects = [];
+
   @override
-  void displayProjectName(String projectName) {
-    this.projectName = projectName;
+  void displayTodaysProjectActivities(List<Project> today) {
+    projects.clear();
+    projects.addAll(today);
   }
 }
 
 void main() {
-  test('Tests correct project name retrieval', () {
+  test('Should return a list of projects with today\'s activities', () {
     // GIVEN
     final Activity activity = Activity(
       projectId: 0,
@@ -21,35 +23,50 @@ void main() {
       label: "Activity0",
       start: DateTime.now(),
     );
-    final project = Project(id: 0, label: "Project0", activities: []);
+    final project = Project(
+      id: 0,
+      label: "Project0",
+      activities: [activity],
+    );
     final dashboardToday = DashboardTodayTest();
     final presenter = DashboardTodayPresenter();
     presenter.delegate = dashboardToday;
 
     // WHEN
-    presenter.displayProjectNameFromActivity(activity, [project]);
+    presenter.getTodayProjects([project]);
 
     // THEN
-    expect(dashboardToday.projectName, "Project0");
+    expect(dashboardToday.projects.isNotEmpty, true);
+    dashboardToday.projects.forEach((act) {
+      expect(act.activities.isNotEmpty, true);
+    });
   });
 
-  test('Tests incorrect project name retrieval', () {
+  test('Should return a list of projects with an empty list of activities', () {
     // GIVEN
+    final now = DateTime.now();
     final Activity activity = Activity(
       projectId: 1,
       id: 0,
       label: "Activity0",
-      start: DateTime.now(),
+      start: DateTime(now.year + 1),
     );
-    final project = Project(id: 0, label: "Project0", activities: []);
+    final project = Project(
+      id: 0,
+      label: "Project0",
+      activities: [activity],
+    );
     final dashboardToday = DashboardTodayTest();
     final presenter = DashboardTodayPresenter();
     presenter.delegate = dashboardToday;
 
     // WHEN
-    presenter.displayProjectNameFromActivity(activity, [project]);
+    presenter.getTodayProjects([project]);
 
     // THEN
-    expect(dashboardToday.projectName, "n/a");
+    expect(dashboardToday.projects.isNotEmpty, true);
+    dashboardToday.projects.forEach((act) {
+      expect(act.activities.isNotEmpty, false);
+    });
   });
 }
