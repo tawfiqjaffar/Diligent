@@ -103,9 +103,7 @@ class _ActivityRowState extends State<ActivityRow>
                       color: Colors.transparent,
                       child: InkWell(
                         customBorder: CircleBorder(),
-                        onTap: () {
-                          print("no");
-                        },
+                        onTap: () {},
                         child: Container(
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,

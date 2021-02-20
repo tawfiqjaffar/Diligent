@@ -2,6 +2,7 @@ import 'package:Diligent/config/style.dart';
 import 'package:Diligent/models/project.dart';
 import 'package:Diligent/views/widgets/heading_title.dart';
 import 'package:Diligent/views/widgets/widgets.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Projects extends StatelessWidget {
@@ -21,6 +22,9 @@ class Projects extends StatelessWidget {
             imgUrl:
                 "https://www.gravatar.com/avatar/867e47ad7bfdfa41da4db0b662b1b212?s=328&d=identicon&r=PG",
           ),
+        ),
+        CupertinoSliverRefreshControl(
+          onRefresh: () {},
         ),
         SliverPadding(
           padding: const EdgeInsets.only(top: 24.0),

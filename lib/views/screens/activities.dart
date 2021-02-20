@@ -6,6 +6,7 @@ import 'package:Diligent/presenters/presenters/activity_row_presenter.dart';
 import 'package:Diligent/views/widgets/custom_app_bar.dart';
 import 'package:Diligent/views/widgets/heading_title.dart';
 import 'package:Diligent/views/widgets/widgets.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Activities extends StatefulWidget {
@@ -38,22 +39,26 @@ class _ActivitiesState extends State<Activities> implements ActivitiesDelegate {
                 "https://www.gravatar.com/avatar/867e47ad7bfdfa41da4db0b662b1b212?s=328&d=identicon&r=PG",
           ),
         ),
+        CupertinoSliverRefreshControl(
+          onRefresh: _refreshData,
+        ),
         SliverPadding(
           padding: const EdgeInsets.only(top: 24.0),
           sliver: SliverToBoxAdapter(
             child: HeadingTitle(
-              title: "Activities",
+              title: "Future Activities",
             ),
           ),
         ),
         SliverPadding(
           padding: const EdgeInsets.only(top: 24.0),
           sliver: SliverToBoxAdapter(
-              child: Column(
-            children: [
-              ...this._future,
-            ],
-          )),
+            child: Column(
+              children: [
+                ...this._future,
+              ],
+            ),
+          ),
         ),
       ],
     );
@@ -78,5 +83,12 @@ class _ActivitiesState extends State<Activities> implements ActivitiesDelegate {
         });
       });
     });
+  }
+
+  Future _refreshData() async {
+    await Future.delayed(Duration(seconds: 3));
+    this.widget.presenter.delegate = this;
+    this.widget.presenter.getFutureProjects(projects);
+    return;
   }
 }

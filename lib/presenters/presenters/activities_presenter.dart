@@ -23,7 +23,13 @@ class ActivitiesPresenter implements Presenter {
           tempProject.activities.add(activity);
         }
       });
+      tempProject.activities.sort((previous, next) {
+        return previous.start.isBefore(next.start) ? -1 : 1;
+      });
       result.add(tempProject);
+    });
+    result.sort((previous, next) {
+      return previous.label.compareTo(next.label);
     });
     delegate.displayFutureProjectActivities(result);
   }
