@@ -18,10 +18,7 @@ class Projects extends StatelessWidget {
           brightness: Brightness.light,
           backgroundColor: Colors.transparent,
           floating: true,
-          flexibleSpace: CustomAppBar(
-            imgUrl:
-                "https://www.gravatar.com/avatar/867e47ad7bfdfa41da4db0b662b1b212?s=328&d=identicon&r=PG",
-          ),
+          flexibleSpace: CustomAppBar(),
         ),
         CupertinoSliverRefreshControl(
           onRefresh: () {},

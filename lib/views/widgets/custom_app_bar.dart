@@ -1,14 +1,30 @@
 import 'package:Diligent/config/palette.dart';
+import 'package:Diligent/presenters/delegates/app_bar_delegate.dart';
+import 'package:Diligent/presenters/presenters/app_bar_presenter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:popover/popover.dart';
+import 'package:focus_detector/focus_detector.dart';
 
 import 'widgets.dart';
 
-class CustomAppBar extends StatelessWidget {
-  final String imgUrl;
+class CustomAppBar extends StatefulWidget {
+  final presenter = AppBarPresenter();
 
-  const CustomAppBar({Key key, this.imgUrl = "default"}) : super(key: key);
+  @override
+  _CustomAppBarState createState() => _CustomAppBarState();
+}
+
+class _CustomAppBarState extends State<CustomAppBar> implements AppBarDelegate {
+  String _imageUrlPath = "default";
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    this.widget.presenter.delegate = this;
+    this.widget.presenter.getUserProfileImage();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -22,8 +38,15 @@ class CustomAppBar extends StatelessWidget {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  ProfileAvatar(
-                    imgUrl: this.imgUrl,
+                  FocusDetector(
+                    onVisibilityGained: () {
+                      this.widget.presenter.delegate = this;
+                      this.widget.presenter.getUserProfileImage();
+                      print('visible');
+                    },
+                    child: ProfileAvatar(
+                      imgUrl: _imageUrlPath,
+                    ),
                   ),
                   const SizedBox(
                     width: 12.0,
@@ -56,13 +79,6 @@ class CustomAppBar extends StatelessWidget {
                                 Navigator.pop(context);
                               },
                             ),
-                            CupertinoActionSheetAction(
-                              child: Text('Idea'),
-                              onPressed: () {
-                                print('pressed idea');
-                                Navigator.pop(context);
-                              },
-                            )
                           ],
                           cancelButton: CupertinoActionSheetAction(
                             child: Text('Cancel'),
@@ -92,6 +108,13 @@ class CustomAppBar extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  @override
+  setUserProfileImage(String path) {
+    setState(() {
+      this._imageUrlPath = path;
+    });
   }
 }
 

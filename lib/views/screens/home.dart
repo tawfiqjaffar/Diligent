@@ -2,6 +2,7 @@ import 'package:Diligent/models/project.dart';
 import 'package:Diligent/presenters/delegates/home_delegate.dart';
 import 'package:Diligent/presenters/presenters/presenters.dart';
 import 'package:Diligent/views/screens/activities.dart';
+import 'package:Diligent/views/screens/profile.dart';
 import 'package:Diligent/views/widgets/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -49,11 +50,7 @@ class _HomeScreenState extends State<HomeScreen> implements HomeDelegate {
                 projectList: _projectList,
               ),
               Activities(),
-              Scaffold(
-                body: Container(
-                  color: Colors.orange,
-                ),
-              ),
+              Profile(),
             ],
           ),
         ),

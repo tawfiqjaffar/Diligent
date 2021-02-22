@@ -5,17 +5,17 @@ final List<Activity> cProgActivities = [
       id: 0,
       projectId: 0,
       label: "Introduction",
-      start: DateTime(2021, 2, 20, 12, 30)),
+      start: DateTime(2021, 2, 22, 12, 30)),
   Activity(
       id: 1,
       projectId: 0,
       label: "putchar",
-      start: DateTime(2021, 2, 20, 14, 00)),
+      start: DateTime(2021, 2, 22, 14, 00)),
   Activity(
       id: 2,
       projectId: 0,
       label: "putstr",
-      start: DateTime(2021, 2, 23, 14, 20)),
+      start: DateTime(2021, 2, 22, 14, 20)),
   Activity(
       id: 3,
       projectId: 0,

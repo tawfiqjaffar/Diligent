@@ -1,5 +1,4 @@
 import 'package:Diligent/config/style.dart';
-import 'package:Diligent/data/projects.dart';
 import 'package:Diligent/models/models.dart';
 import 'package:Diligent/presenters/delegates/activity_row_delegate.dart';
 import 'package:Diligent/presenters/presenters/activity_row_presenter.dart';
@@ -45,14 +44,14 @@ class _ActivityRowState extends State<ActivityRow>
           borderRadius: BorderRadius.all(Radius.circular(25.0)),
         ),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0),
+          padding: const EdgeInsets.symmetric(horizontal: 12.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Container(
-                child: ProfileAvatar(
-                  imgUrl:
-                      "https://assets.materialup.com/uploads/5cda2c2f-9596-403f-946f-f72e70c8e94a/preview.png",
+                child: Icon(
+                  Icons.chevron_right,
+                  size: 32.0,
                 ),
               ),
               const SizedBox(

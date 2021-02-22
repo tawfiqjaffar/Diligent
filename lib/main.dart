@@ -1,10 +1,13 @@
 import 'package:Diligent/config/palette.dart';
 import 'package:Diligent/presenters/presenters/presenters.dart';
+import 'package:Diligent/utils/user_defaults.dart';
 import 'package:flutter/material.dart';
 
 import 'views/screens/screens.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await UserDefaults.init();
   runApp(MyApp());
 }
 
