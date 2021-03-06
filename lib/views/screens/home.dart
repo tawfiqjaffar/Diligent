@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:Diligent/models/project.dart';
 import 'package:Diligent/presenters/delegates/home_delegate.dart';
 import 'package:Diligent/presenters/presenters/presenters.dart';
@@ -7,6 +9,7 @@ import 'package:Diligent/views/widgets/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'authentication/login.dart';
 import 'screens.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -32,6 +35,7 @@ class _HomeScreenState extends State<HomeScreen> implements HomeDelegate {
   @override
   void initState() {
     super.initState();
+
     this.widget.presenter.delegate = this;
     this.widget.presenter.getProjects();
   }
@@ -71,5 +75,11 @@ class _HomeScreenState extends State<HomeScreen> implements HomeDelegate {
       this._projectList.clear();
       this._projectList.addAll(projects);
     });
+  }
+
+  @override
+  void redirectToLogin() {
+    scheduleMicrotask(() => Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => Login())));
   }
 }

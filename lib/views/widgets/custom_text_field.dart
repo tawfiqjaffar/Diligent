@@ -19,11 +19,11 @@ class CustomTextField extends StatelessWidget {
         filled: true,
         fillColor: Colors.white,
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(24)),
+          borderRadius: BorderRadius.all(Radius.circular(16)),
           borderSide: BorderSide(width: 1, color: Colors.transparent),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(24)),
+          borderRadius: BorderRadius.all(Radius.circular(16)),
           borderSide: BorderSide(width: 1, color: Colors.transparent),
         ),
         floatingLabelBehavior: FloatingLabelBehavior.never,

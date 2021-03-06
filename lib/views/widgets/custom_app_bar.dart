@@ -16,6 +16,7 @@ class CustomAppBar extends StatefulWidget {
 
 class _CustomAppBarState extends State<CustomAppBar> implements AppBarDelegate {
   String _imageUrlPath = "default";
+  String _userName = "";
 
   @override
   void initState() {
@@ -42,6 +43,7 @@ class _CustomAppBarState extends State<CustomAppBar> implements AppBarDelegate {
                     onVisibilityGained: () {
                       this.widget.presenter.delegate = this;
                       this.widget.presenter.getUserProfileImage();
+                      this.widget.presenter.getUserName();
                       print('visible');
                     },
                     child: ProfileAvatar(
@@ -53,7 +55,7 @@ class _CustomAppBarState extends State<CustomAppBar> implements AppBarDelegate {
                   ),
                   Expanded(
                     child: Text(
-                      "Hi, User",
+                      "Hi, $_userName",
                       style: const TextStyle(
                           color: Palette.primary,
                           fontWeight: FontWeight.bold,
@@ -114,6 +116,13 @@ class _CustomAppBarState extends State<CustomAppBar> implements AppBarDelegate {
   setUserProfileImage(String path) {
     setState(() {
       this._imageUrlPath = path;
+    });
+  }
+
+  @override
+  setUserName(String name) {
+    setState(() {
+      this._userName = name;
     });
   }
 }

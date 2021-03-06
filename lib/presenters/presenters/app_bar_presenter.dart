@@ -21,4 +21,12 @@ class AppBarPresenter implements Presenter {
       print(e);
     }
   }
+
+  getUserName() {
+    final delegate = this.delegate as AppBarDelegate;
+
+    final name = UserDefaults.getString(Storage.userName) ?? "";
+
+    delegate.setUserName(name);
+  }
 }
