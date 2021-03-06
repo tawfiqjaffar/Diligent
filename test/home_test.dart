@@ -10,6 +10,9 @@ class HomeTest implements HomeDelegate {
     this.projects.clear();
     this.projects.addAll(projects);
   }
+
+  @override
+  void redirectToLogin() {}
 }
 
 void main() {
