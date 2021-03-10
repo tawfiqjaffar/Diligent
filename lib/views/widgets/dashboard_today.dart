@@ -25,7 +25,7 @@ class _DashboardTodayState extends State<DashboardToday>
   void initState() {
     super.initState();
     this.widget.presenter.delegate = this;
-    this.widget.presenter.getTodayProjects(projects);
+    this.widget.presenter.getTodayProjects(projects, this);
   }
 
   @override
@@ -49,12 +49,18 @@ class _DashboardTodayState extends State<DashboardToday>
       this._today.clear();
       today.forEach((el) {
         el.activities.forEach((act) {
+          final ActivityRowPresenter presenter = ActivityRowPresenter();
+
+          presenter.dashboardTodayDelegate = this;
           this._today.add(ActivityRow(
-                activity: act,
-                project: el,
-                isFirst: isFirst,
-                presenter: ActivityRowPresenter(),
-              ));
+              activity: act,
+              project: el,
+              isFirst: isFirst,
+              dashboardTodayDelegate: this,
+              activitiesDelegate: null,
+              activitiesPresenter: null,
+              dashboardTodayPresenter: this.widget.presenter,
+              presenter: presenter));
           isFirst = false;
         });
       });

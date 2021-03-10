@@ -10,12 +10,12 @@ final List<Activity> cProgActivities = [
       id: 1,
       projectId: 0,
       label: "putchar",
-      start: DateTime(2021, 3, 9, 14, 00)),
+      start: DateTime(2021, 3, 10, 14, 00)),
   Activity(
       id: 2,
       projectId: 0,
-      label: "putstrasdfasdf",
-      start: DateTime(2021, 3, 9, 14, 00)),
+      label: "putstr",
+      start: DateTime(2021, 3, 10, 14, 00)),
   Activity(
       id: 3,
       projectId: 0,

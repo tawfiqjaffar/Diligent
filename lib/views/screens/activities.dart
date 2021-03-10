@@ -23,7 +23,7 @@ class _ActivitiesState extends State<Activities> implements ActivitiesDelegate {
     // TODO: implement initState
     super.initState();
     this.widget.presenter.delegate = this;
-    this.widget.presenter.getFutureProjects(projects);
+    this.widget.presenter.getFutureProjects(projects, this);
   }
 
   @override
@@ -68,12 +68,19 @@ class _ActivitiesState extends State<Activities> implements ActivitiesDelegate {
       this._future.clear();
       future.forEach((el) {
         el.activities.forEach((act) {
+          final ActivityRowPresenter presenter = ActivityRowPresenter();
+
+          presenter.activitiesDelegate = this;
           this._future.add(
                 ActivityRow(
                   activity: act,
                   project: el,
+                  dashboardTodayDelegate: null,
+                  activitiesDelegate: this,
                   isFirst: isFirst,
-                  presenter: ActivityRowPresenter(),
+                  dashboardTodayPresenter: null,
+                  activitiesPresenter: this.widget.presenter,
+                  presenter: presenter,
                 ),
               );
           isFirst = false;
@@ -85,7 +92,7 @@ class _ActivitiesState extends State<Activities> implements ActivitiesDelegate {
   Future _refreshData() async {
     await Future.delayed(Duration(seconds: 3));
     this.widget.presenter.delegate = this;
-    this.widget.presenter.getFutureProjects(projects);
+    this.widget.presenter.getFutureProjects(projects, this);
     return;
   }
 }

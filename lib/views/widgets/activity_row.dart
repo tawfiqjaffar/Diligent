@@ -1,24 +1,34 @@
 import 'package:Diligent/config/style.dart';
 import 'package:Diligent/models/models.dart';
 import 'package:Diligent/presenters/delegates/activity_row_delegate.dart';
+import 'package:Diligent/presenters/delegates/delegates.dart';
+import 'package:Diligent/presenters/presenters/activities_presenter.dart';
 import 'package:Diligent/presenters/presenters/activity_row_presenter.dart';
+import 'package:Diligent/presenters/presenters/dashboard_today_presenter.dart';
 import 'package:Diligent/utils/date_time.dart';
-import 'package:Diligent/views/widgets/profile_avatar.dart';
 import 'package:flutter/material.dart';
 
 class ActivityRow extends StatefulWidget {
   final bool isFirst;
   final Activity activity;
   final Project project;
+  final ActivitiesPresenter activitiesPresenter;
+  final DashboardTodayPresenter dashboardTodayPresenter;
   final ActivityRowPresenter presenter;
+  final ActivitiesDelegate activitiesDelegate;
+  final DashboardTodayDelegate dashboardTodayDelegate;
 
-  const ActivityRow(
-      {Key key,
-      this.isFirst = false,
-      @required this.activity,
-      @required this.project,
-      this.presenter})
-      : super(key: key);
+  const ActivityRow({
+    Key key,
+    this.isFirst = false,
+    @required this.activity,
+    @required this.project,
+    this.presenter,
+    @required this.activitiesPresenter,
+    @required this.dashboardTodayPresenter,
+    @required this.activitiesDelegate,
+    @required this.dashboardTodayDelegate,
+  }) : super(key: key);
   @override
   _ActivityRowState createState() => _ActivityRowState();
 }
@@ -29,6 +39,9 @@ class _ActivityRowState extends State<ActivityRow>
   void initState() {
     super.initState();
     this.widget.presenter.delegate = this;
+    this.widget.presenter.activitiesDelegate = this.widget.activitiesDelegate;
+    this.widget.presenter.dashboardTodayDelegate =
+        this.widget.dashboardTodayDelegate;
   }
 
   @override
@@ -102,7 +115,12 @@ class _ActivityRowState extends State<ActivityRow>
                       color: Colors.transparent,
                       child: InkWell(
                         customBorder: CircleBorder(),
-                        onTap: () {},
+                        onTap: () {
+                          this.widget.presenter.finishActivity(
+                              this.widget.activity,
+                              this.widget.activitiesPresenter,
+                              this.widget.dashboardTodayPresenter);
+                        },
                         child: Container(
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,

@@ -8,7 +8,7 @@ class ActivitiesPresenter implements Presenter {
   @override
   Delegate delegate;
 
-  void getFutureProjects(List<Project> projects) {
+  void getFutureProjects(List<Project> projects, ActivitiesDelegate _delegate) {
     final delegate = this.delegate as ActivitiesDelegate;
     final List<Project> result = [];
 
@@ -19,7 +19,7 @@ class ActivitiesPresenter implements Presenter {
         label: project.label,
       );
       project.activities.forEach((activity) {
-        if (DateTimeHelper.isFuture(activity.start)) {
+        if (DateTimeHelper.isFuture(activity.start) && activity.end == null) {
           tempProject.activities.add(activity);
         }
       });
@@ -31,6 +31,6 @@ class ActivitiesPresenter implements Presenter {
     result.sort((previous, next) {
       return previous.label.compareTo(next.label);
     });
-    delegate.displayFutureProjectActivities(result);
+    _delegate?.displayFutureProjectActivities(result);
   }
 }

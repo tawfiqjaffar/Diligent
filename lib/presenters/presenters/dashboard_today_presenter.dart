@@ -8,7 +8,8 @@ class DashboardTodayPresenter implements Presenter {
   @override
   Delegate delegate;
 
-  void getTodayProjects(List<Project> projects) {
+  void getTodayProjects(
+      List<Project> projects, DashboardTodayDelegate _delegate) {
     final delegate = this.delegate as DashboardTodayDelegate;
     final List<Project> result = [];
 
@@ -19,7 +20,7 @@ class DashboardTodayPresenter implements Presenter {
         label: project.label,
       );
       project.activities.forEach((activity) {
-        if (DateTimeHelper.isToday(activity.start)) {
+        if (DateTimeHelper.isToday(activity.start) && activity.end == null) {
           tempProject.activities.add(activity);
         }
       });
@@ -31,6 +32,6 @@ class DashboardTodayPresenter implements Presenter {
     result.sort((previous, next) {
       return previous.label.compareTo(next.label);
     });
-    delegate.displayTodaysProjectActivities(result);
+    _delegate.displayTodaysProjectActivities(result);
   }
 }
