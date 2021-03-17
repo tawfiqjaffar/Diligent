@@ -4,6 +4,7 @@ enum Storage {
   profileImage,
   isLoggedIn,
   userName,
+  projects,
 }
 
 extension StorageKeys on Storage {
@@ -15,6 +16,8 @@ extension StorageKeys on Storage {
         return 'USER_NAME';
       case Storage.isLoggedIn:
         return 'IS_LOGGEd_IN';
+      case Storage.projects:
+        return 'PROJECTS';
       default:
         return 'UNKNOWN';
     }
@@ -38,6 +41,10 @@ class UserDefaults {
     return await _prefs.setBool(key.value, value);
   }
 
+  static Future<bool> setStringList(Storage key, List<String> value) async {
+    return await _prefs.setStringList(key.value, value);
+  }
+
   // getters
   static String getString(Storage key) {
     return _prefs.getString(key.value);
@@ -45,5 +52,15 @@ class UserDefaults {
 
   static bool getBool(Storage key) {
     return _prefs.getBool(key.value);
+  }
+
+  static List<String> getStringList(Storage key) {
+    return _prefs.getStringList(key.value);
+  }
+
+  // remove
+
+  static Future<bool> remove(Storage key) {
+    return _prefs.remove(key.value);
   }
 }

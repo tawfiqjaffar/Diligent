@@ -6,3 +6,4 @@ export 'dashboard_stats.dart';
 export 'dashboard_today.dart';
 export 'dashboard_heading.dart';
 export 'activity_row.dart';
+export 'chevron_app_bar.dart';

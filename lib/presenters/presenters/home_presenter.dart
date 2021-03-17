@@ -1,4 +1,6 @@
 import 'package:Diligent/data/projects.dart';
+import 'package:Diligent/models/activity.dart';
+import 'package:Diligent/models/project.dart';
 import 'package:Diligent/presenters/delegates/delegate.dart';
 import 'package:Diligent/presenters/delegates/home_delegate.dart';
 import 'package:Diligent/presenters/presenters/presenter.dart';
@@ -23,6 +25,7 @@ class HomePresenter implements Presenter {
   void getProjects() {
     if (_checkLoggedIn()) {
       final delegate = this.delegate as HomeDelegate;
+
       final projectsList = projects;
       delegate.displayProjects(projectsList);
     }

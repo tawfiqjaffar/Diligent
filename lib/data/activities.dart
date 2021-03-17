@@ -3,9 +3,9 @@ import 'package:Diligent/models/activity.dart';
 final List<Activity> cProgActivities = [
   Activity(
       id: 0,
-      projectId: 0,
+      projectId: 34,
       label: "Introduction",
-      start: DateTime(2021, 3, 9, 12, 30)),
+      start: DateTime(2021, 3, 17, 12, 30)),
   Activity(
       id: 1,
       projectId: 0,
