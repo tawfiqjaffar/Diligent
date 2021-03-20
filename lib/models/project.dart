@@ -75,6 +75,28 @@ class Project {
     return true;
   }
 
+  static bool updateActivity(String projectId, Activity activity) {
+    var listFromMemory = UserDefaults.getStringList(Storage.projects);
+    if (listFromMemory == null) {
+      listFromMemory = [];
+      return false;
+    }
+    List<String> toSave = [];
+    listFromMemory.forEach((stringProject) {
+      Project p = Project.fromJson(json.decode(stringProject));
+      if (p.id == projectId) {
+        p.activities.forEach((act) {
+          if (act.id == activity.id) {
+            act.end = activity.end;
+          }
+        });
+      }
+      toSave.add(json.encode(p.toJson()));
+    });
+    UserDefaults.setStringList(Storage.projects, toSave);
+    return true;
+  }
+
   // Project.fromJson(Map<String, dynamic> json)
   //     : label = json['label'],
   //       id = json['id'],

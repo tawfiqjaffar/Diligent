@@ -19,7 +19,6 @@ class _ActivitiesState extends State<Activities> implements ActivitiesDelegate {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     this.widget.presenter.delegate = this;
     this.widget.presenter.getFutureProjects(Project.readFromMemory(), this);
@@ -91,6 +90,7 @@ class _ActivitiesState extends State<Activities> implements ActivitiesDelegate {
   Future _refreshData() async {
     await Future.delayed(Duration(seconds: 3));
     this.widget.presenter.delegate = this;
+    var projects = Project.readFromMemory();
     this.widget.presenter.getFutureProjects(Project.readFromMemory(), this);
     return;
   }

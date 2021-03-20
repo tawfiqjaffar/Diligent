@@ -9,8 +9,18 @@ class DateTimeHelper {
   }
 
   static bool isFuture(DateTime dateTime) {
-    return dateTime.isAfter(DateTime.now()) &&
-        dateTime.day > DateTime.now().day;
+    DateTime now = DateTime.now();
+
+    if (dateTime.year > now.year) {
+      return true;
+    }
+    if (dateTime.month > now.month) {
+      return true;
+    }
+    if (dateTime.day > now.day) {
+      return true;
+    }
+    return false;
   }
 
   static String formatToReadable(DateTime dateTime) {

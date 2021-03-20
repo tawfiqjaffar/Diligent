@@ -1,5 +1,5 @@
-import 'package:Diligent/data/projects.dart';
 import 'package:Diligent/models/activity.dart';
+import 'package:Diligent/models/project.dart';
 import 'package:Diligent/presenters/delegates/delegate.dart';
 import 'package:Diligent/presenters/delegates/delegates.dart';
 import 'package:Diligent/presenters/presenters/activities_presenter.dart';
@@ -19,7 +19,10 @@ class ActivityRowPresenter implements Presenter {
       ActivitiesPresenter activitiesPresenter,
       DashboardTodayPresenter dashboardTodayPresenter) {
     activity.end = DateTime.now();
-    activitiesPresenter?.getFutureProjects(projects, activitiesDelegate);
-    dashboardTodayPresenter?.getTodayProjects(projects, dashboardTodayDelegate);
+    Project.updateActivity(activity.projectId, activity);
+    activitiesPresenter?.getFutureProjects(
+        Project.readFromMemory(), activitiesDelegate);
+    dashboardTodayPresenter?.getTodayProjects(
+        Project.readFromMemory(), dashboardTodayDelegate);
   }
 }

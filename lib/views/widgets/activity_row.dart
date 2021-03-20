@@ -6,6 +6,7 @@ import 'package:Diligent/presenters/presenters/activities_presenter.dart';
 import 'package:Diligent/presenters/presenters/activity_row_presenter.dart';
 import 'package:Diligent/presenters/presenters/dashboard_today_presenter.dart';
 import 'package:Diligent/utils/date_time.dart';
+import 'package:Diligent/utils/utils.dart';
 import 'package:flutter/material.dart';
 
 class ActivityRow extends StatefulWidget {
@@ -145,6 +146,7 @@ class _ActivityRowState extends State<ActivityRow>
                         customBorder: CircleBorder(),
                         onTap: () {
                           print("no");
+                          UserDefaults.remove(Storage.projects);
                         },
                         child: Container(
                           decoration: BoxDecoration(
