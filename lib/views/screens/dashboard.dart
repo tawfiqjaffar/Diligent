@@ -3,11 +3,14 @@ import 'package:Diligent/views/widgets/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class Dashboard extends StatelessWidget {
+class Dashboard extends StatefulWidget {
+  @override
+  _DashboardState createState() => _DashboardState();
+}
+
+class _DashboardState extends State<Dashboard> {
   final searchTextFieldEditingController = TextEditingController();
-  final today = DashboardToday(
-    presenter: DashboardTodayPresenter(),
-  );
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -25,7 +28,7 @@ class Dashboard extends StatelessWidget {
           CupertinoSliverRefreshControl(
             onRefresh: () async {
               await Future<void>.delayed(const Duration(milliseconds: 1000));
-              this.today.todayState.refreshData();
+              setState(() {});
             },
           ),
           SliverPadding(

@@ -9,17 +9,15 @@ import 'package:flutter/rendering.dart';
 import 'widgets.dart';
 
 class DashboardToday extends StatefulWidget {
-  final DashboardTodayPresenter presenter;
+  final DashboardTodayPresenter presenter = DashboardTodayPresenter();
 
-  final _DashboardTodayState todayState = _DashboardTodayState();
+  // _DashboardTodayState todayState;
 
-  DashboardToday({
-    Key key,
-    @required this.presenter,
-  }) : super(key: key);
+  DashboardToday({Key key}) : super(key: key);
+
   @override
   _DashboardTodayState createState() {
-    return this.todayState;
+    return _DashboardTodayState();
   }
 }
 
@@ -30,6 +28,7 @@ class _DashboardTodayState extends State<DashboardToday>
 
   void refreshData() {
     projects = Project.readFromMemory();
+
     this.widget.presenter.getTodayProjects(projects, this);
   }
 

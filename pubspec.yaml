@@ -36,6 +36,7 @@ dependencies:
   shared_preferences: ^0.5.12+4
   focus_detector: ^1.1.0+1
   path_provider: ^1.6.27
+  uuid: ^3.0.1
 
 dev_dependencies:
   flutter_test:

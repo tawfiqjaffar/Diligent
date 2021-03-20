@@ -1,10 +1,10 @@
 import 'package:meta/meta.dart';
 
 class Activity {
-  final int id;
+  final String id;
   final String label;
   final DateTime start;
-  final int projectId;
+  final String projectId;
   DateTime end;
 
   Activity({

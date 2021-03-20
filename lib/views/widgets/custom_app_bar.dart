@@ -1,6 +1,7 @@
 import 'package:Diligent/config/palette.dart';
 import 'package:Diligent/presenters/delegates/app_bar_delegate.dart';
 import 'package:Diligent/presenters/presenters/app_bar_presenter.dart';
+import 'package:Diligent/views/screens/create_activity.dart';
 import 'package:Diligent/views/screens/screens.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -71,8 +72,9 @@ class _CustomAppBarState extends State<CustomAppBar> implements AppBarDelegate {
                             CupertinoActionSheetAction(
                               child: Text('Activity'),
                               onPressed: () {
-                                print('pressed action');
                                 Navigator.pop(context);
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => CreateActivity()));
                               },
                             ),
                             CupertinoActionSheetAction(

@@ -91,7 +91,7 @@ class _ActivitiesState extends State<Activities> implements ActivitiesDelegate {
   Future _refreshData() async {
     await Future.delayed(Duration(seconds: 3));
     this.widget.presenter.delegate = this;
-    this.widget.presenter.getFutureProjects(projects, this);
+    this.widget.presenter.getFutureProjects(Project.readFromMemory(), this);
     return;
   }
 }

@@ -1,8 +1,6 @@
 import 'dart:convert';
 
 import 'package:Diligent/config/palette.dart';
-import 'package:Diligent/data/activities.dart';
-import 'package:Diligent/models/activity.dart';
 import 'package:Diligent/models/project.dart';
 import 'package:Diligent/presenters/delegates/create_project_delegate.dart';
 import 'package:Diligent/presenters/presenters/create_project_presenter.dart';
@@ -69,7 +67,6 @@ class _CreateProjectState extends State<CreateProject>
                     onPressed: () {
                       this.widget.createProjectPresenter.processProjectName(
                             projectNameFieldController.text,
-                            1,
                           );
                     },
                     color: Palette.secondary,
@@ -128,13 +125,14 @@ class _CreateProjectState extends State<CreateProject>
   @override
   void saveProject(Project project) {
     // TODO: implement saveProject
-    var listFromMemory = UserDefaults.getStringList(Storage.projects);
-    if (listFromMemory == null) {
-      listFromMemory = [];
-    }
+    // var listFromMemory = UserDefaults.getStringList(Storage.projects);
+    // if (listFromMemory == null) {
+    //   listFromMemory = [];
+    // }
 
-    listFromMemory.add(json.encode(project.toJson()));
-    UserDefaults.setStringList(Storage.projects, listFromMemory);
+    // listFromMemory.add(json.encode(project.toJson()));
+    // UserDefaults.setStringList(Storage.projects, listFromMemory);
+    Project.saveProject(project);
     testUserDefaults(project);
     Navigator.of(context).pop();
   }

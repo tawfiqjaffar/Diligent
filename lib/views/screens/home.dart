@@ -51,7 +51,7 @@ class _HomeScreenState extends State<HomeScreen> implements HomeDelegate {
             children: [
               Dashboard(),
               Projects(
-                projectList: _projectList,
+                projectList: Project.readFromMemory(),
               ),
               Activities(),
               Profile(),

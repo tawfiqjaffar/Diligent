@@ -5,7 +5,7 @@ import 'package:Diligent/utils/utils.dart';
 import 'package:meta/meta.dart';
 
 class Project {
-  final int id;
+  final String id;
   final String label;
 
   final List<Activity> activities;
@@ -45,6 +45,34 @@ class Project {
     });
 
     return result;
+  }
+
+  static void saveProject(Project project) {
+    var listFromMemory = UserDefaults.getStringList(Storage.projects);
+    if (listFromMemory == null) {
+      listFromMemory = [];
+    }
+
+    listFromMemory.add(json.encode(project.toJson()));
+    UserDefaults.setStringList(Storage.projects, listFromMemory);
+  }
+
+  static bool saveActivity(String projectId, Activity activity) {
+    var listFromMemory = UserDefaults.getStringList(Storage.projects);
+    if (listFromMemory == null) {
+      listFromMemory = [];
+      return false;
+    }
+    List<String> toSave = [];
+    listFromMemory.forEach((stringProject) {
+      Project p = Project.fromJson(json.decode(stringProject));
+      if (p.id == projectId) {
+        p.activities.add(activity);
+      }
+      toSave.add(json.encode(p.toJson()));
+    });
+    UserDefaults.setStringList(Storage.projects, toSave);
+    return true;
   }
 
   // Project.fromJson(Map<String, dynamic> json)

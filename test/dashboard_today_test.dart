@@ -18,13 +18,13 @@ void main() {
   test('Should return a list of projects with today\'s activities', () {
     // GIVEN
     final Activity activity = Activity(
-      projectId: 0,
-      id: 0,
+      projectId: "asf",
+      id: "test1",
       label: "Activity0",
       start: DateTime.now(),
     );
     final project = Project(
-      id: 0,
+      id: "test2",
       label: "Project0",
       activities: [activity],
     );
@@ -33,7 +33,7 @@ void main() {
     presenter.delegate = dashboardToday;
 
     // WHEN
-    presenter.getTodayProjects([project]);
+    presenter.getTodayProjects([project], dashboardToday);
 
     // THEN
     expect(dashboardToday.projects.isNotEmpty, true);
@@ -46,13 +46,13 @@ void main() {
     // GIVEN
     final now = DateTime.now();
     final Activity activity = Activity(
-      projectId: 1,
-      id: 0,
+      projectId: "asdf",
+      id: "test1",
       label: "Activity0",
       start: DateTime(now.year + 1),
     );
     final project = Project(
-      id: 0,
+      id: "test2",
       label: "Project0",
       activities: [activity],
     );
@@ -61,7 +61,7 @@ void main() {
     presenter.delegate = dashboardToday;
 
     // WHEN
-    presenter.getTodayProjects([project]);
+    presenter.getTodayProjects([project], dashboardToday);
 
     // THEN
     expect(dashboardToday.projects.isNotEmpty, true);
