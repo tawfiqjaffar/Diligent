@@ -1,9 +1,13 @@
 import 'package:Diligent/presenters/presenters/dashboard_today_presenter.dart';
 import 'package:Diligent/views/widgets/widgets.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Dashboard extends StatelessWidget {
   final searchTextFieldEditingController = TextEditingController();
+  final today = DashboardToday(
+    presenter: DashboardTodayPresenter(),
+  );
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -17,6 +21,12 @@ class Dashboard extends StatelessWidget {
             backgroundColor: Colors.transparent,
             floating: true,
             flexibleSpace: CustomAppBar(),
+          ),
+          CupertinoSliverRefreshControl(
+            onRefresh: () async {
+              await Future<void>.delayed(const Duration(milliseconds: 1000));
+              this.today.todayState.refreshData();
+            },
           ),
           SliverPadding(
             padding: const EdgeInsets.only(top: 24.0),
@@ -41,9 +51,7 @@ class Dashboard extends StatelessWidget {
           SliverPadding(
             padding: const EdgeInsets.only(top: 32.0),
             sliver: SliverToBoxAdapter(
-              child: DashboardToday(
-                presenter: DashboardTodayPresenter(),
-              ),
+              child: today,
             ),
           ),
           SliverPadding(padding: const EdgeInsets.only(bottom: 16.0))

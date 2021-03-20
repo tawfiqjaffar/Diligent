@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:Diligent/models/activity.dart';
+import 'package:Diligent/utils/utils.dart';
 import 'package:meta/meta.dart';
 
 class Project {
@@ -32,6 +33,18 @@ class Project {
       return Activity.fromJson(json.decode(itemActivity));
     }).toList();
     return Project(activities: activities, label: label, id: id);
+  }
+
+  static List<Project> readFromMemory() {
+    var listFromMemory = UserDefaults.getStringList(Storage.projects);
+    List<Project> result = [];
+
+    listFromMemory.forEach((s) {
+      Project p = Project.fromJson(json.decode(s));
+      result.add(p);
+    });
+
+    return result;
   }
 
   // Project.fromJson(Map<String, dynamic> json)

@@ -55,7 +55,13 @@ class UserDefaults {
   }
 
   static List<String> getStringList(Storage key) {
-    return _prefs.getStringList(key.value);
+    var result = _prefs.getStringList(key.value);
+
+    if (result == null) {
+      return [];
+    }
+
+    return result;
   }
 
   // remove

@@ -1,4 +1,3 @@
-import 'package:Diligent/data/projects.dart';
 import 'package:Diligent/models/project.dart';
 import 'package:Diligent/presenters/delegates/delegates.dart';
 import 'package:Diligent/presenters/presenters/activities_presenter.dart';
@@ -23,7 +22,7 @@ class _ActivitiesState extends State<Activities> implements ActivitiesDelegate {
     // TODO: implement initState
     super.initState();
     this.widget.presenter.delegate = this;
-    this.widget.presenter.getFutureProjects(projects, this);
+    this.widget.presenter.getFutureProjects(Project.readFromMemory(), this);
   }
 
   @override

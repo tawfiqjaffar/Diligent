@@ -1,30 +1,43 @@
-import 'package:Diligent/data/projects.dart';
 import 'package:Diligent/models/project.dart';
 import 'package:Diligent/presenters/delegates/dashboard_today_delegate.dart';
 import 'package:Diligent/presenters/presenters/activity_row_presenter.dart';
 import 'package:Diligent/presenters/presenters/dashboard_today_presenter.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 import 'widgets.dart';
 
 class DashboardToday extends StatefulWidget {
   final DashboardTodayPresenter presenter;
 
-  const DashboardToday({
+  final _DashboardTodayState todayState = _DashboardTodayState();
+
+  DashboardToday({
     Key key,
     @required this.presenter,
   }) : super(key: key);
   @override
-  _DashboardTodayState createState() => _DashboardTodayState();
+  _DashboardTodayState createState() {
+    return this.todayState;
+  }
 }
 
 class _DashboardTodayState extends State<DashboardToday>
     implements DashboardTodayDelegate {
   final List<Widget> _today = [];
+  List<Project> projects = [];
+
+  void refreshData() {
+    projects = Project.readFromMemory();
+    this.widget.presenter.getTodayProjects(projects, this);
+  }
+
   @override
   void initState() {
     super.initState();
     this.widget.presenter.delegate = this;
+    projects = Project.readFromMemory();
     this.widget.presenter.getTodayProjects(projects, this);
   }
 
