@@ -1,7 +1,9 @@
 import 'dart:io';
 
 import 'package:Diligent/config/palette.dart';
+import 'package:Diligent/models/models.dart';
 import 'package:Diligent/utils/user_defaults.dart';
+import 'package:Diligent/views/widgets/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
@@ -15,6 +17,7 @@ class Profile extends StatefulWidget {
 
 class _ProfileState extends State<Profile> {
   File _imageFile;
+  _AcquiredSkills acSkills = _AcquiredSkills();
 
   @override
   void initState() {
@@ -24,7 +27,9 @@ class _ProfileState extends State<Profile> {
       getApplicationDocumentsDirectory().then((result) {
         try {
           final dirPath = result.path;
-          _imageFile = File("$dirPath/$profileImagePath");
+          setState(() {
+            _imageFile = File("$dirPath/$profileImagePath");
+          });
         } catch (e) {}
       }).catchError((err) {});
     }
@@ -92,83 +97,148 @@ class _ProfileState extends State<Profile> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: [
-          SizedBox(
-            height: 24.0,
-          ),
-          Container(
-            child: Center(
-              child: Stack(
-                overflow: Overflow.visible,
-                alignment: Alignment.topRight,
-                children: [
-                  InkWell(
-                    onTap: () {
-                      final act = CupertinoActionSheet(
-                          title: Text('New profile picture'),
-                          actions: [
-                            CupertinoActionSheetAction(
-                              child: Text('Choose from gallery'),
+    return CustomScrollView(
+      slivers: [
+        CupertinoSliverRefreshControl(
+          onRefresh: () async {
+            setState(() {
+              acSkills = null;
+            });
+            await Future<void>.delayed(const Duration(milliseconds: 1000));
+            setState(() {
+              acSkills = _AcquiredSkills();
+            });
+          },
+        ),
+        SliverPadding(
+          padding: const EdgeInsets.only(top: 24.0),
+          sliver: SliverToBoxAdapter(
+            child: Container(
+              child: Center(
+                child: Stack(
+                  overflow: Overflow.visible,
+                  alignment: Alignment.topRight,
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        final act = CupertinoActionSheet(
+                            title: Text('New profile picture'),
+                            actions: [
+                              CupertinoActionSheetAction(
+                                child: Text('Choose from gallery'),
+                                onPressed: () {
+                                  print('pressed action');
+                                  Navigator.pop(context);
+                                  _getFromGallery();
+                                },
+                              ),
+                              CupertinoActionSheetAction(
+                                child: Text('Take picture'),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                  _takePicture();
+                                },
+                              ),
+                            ],
+                            cancelButton: CupertinoActionSheetAction(
+                              child: Text('Cancel'),
                               onPressed: () {
-                                print('pressed action');
                                 Navigator.pop(context);
-                                _getFromGallery();
                               },
-                            ),
-                            CupertinoActionSheetAction(
-                              child: Text('Take picture'),
-                              onPressed: () {
-                                Navigator.pop(context);
-                                _takePicture();
-                              },
-                            ),
-                          ],
-                          cancelButton: CupertinoActionSheetAction(
-                            child: Text('Cancel'),
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                          ));
-                      showCupertinoModalPopup(
-                          context: context,
-                          builder: (BuildContext context) => act);
-                    },
-                    child: CircleAvatar(
-                      radius: 64.0,
-                      child: ClipOval(
-                        child: _imageFile == null
-                            ? Image.network(
-                                "https://iupac.org/wp-content/uploads/2018/05/default-avatar.png")
-                            : openFile(),
+                            ));
+                        showCupertinoModalPopup(
+                            context: context,
+                            builder: (BuildContext context) => act);
+                      },
+                      child: CircleAvatar(
+                        radius: 64.0,
+                        child: ClipOval(
+                          child: _imageFile == null
+                              ? Image.network(
+                                  "https://iupac.org/wp-content/uploads/2018/05/default-avatar.png")
+                              : openFile(),
+                        ),
                       ),
                     ),
-                  ),
-                  Positioned(
-                    child: Icon(
-                      Icons.camera_alt,
-                      color: Palette.primary,
+                    Positioned(
+                      child: Icon(
+                        Icons.camera_alt,
+                        color: Palette.primary,
+                      ),
+                      right: -10,
                     ),
-                    right: -10,
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
-          SizedBox(
-            height: 24.0,
-          ),
-          Text(
-            "Tawfiq JAFFAR",
-            style: const TextStyle(
-              fontSize: 24.0,
-              fontWeight: FontWeight.bold,
-              color: Palette.primary,
+        ),
+        SliverPadding(
+          padding: const EdgeInsets.only(top: 24.0),
+          sliver: SliverToBoxAdapter(
+            child: Center(
+              child: Text(
+                UserDefaults.getString(Storage.userName),
+                style: const TextStyle(
+                  fontSize: 24.0,
+                  fontWeight: FontWeight.bold,
+                  color: Palette.primary,
+                ),
+              ),
             ),
           ),
-        ],
-      ),
+        ),
+        SliverPadding(
+          padding: const EdgeInsets.only(top: 36.0),
+          sliver: SliverToBoxAdapter(
+            child: acSkills,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _AcquiredSkills extends StatefulWidget {
+  @override
+  __AcquiredSkillsState createState() => __AcquiredSkillsState();
+}
+
+class __AcquiredSkillsState extends State<_AcquiredSkills> {
+  final List<Widget> _skills = [];
+
+  List<Project> projects = [];
+
+  void _getProjects() {
+    setState(() {
+      List<Project> projectList = Project.readFromMemory();
+      setState(() {
+        projects = Project.filterFinishedProjects(projectList);
+      });
+    });
+  }
+
+  @override
+  initState() {
+    super.initState();
+    _getProjects();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        DashboardHeading(text: "Acquired Skills"),
+        Column(
+          children: this.projects.map((el) {
+            return ProjectRow(
+              project: el,
+              nbActivities: el.activities.length,
+            );
+          }).toList(),
+        ),
+      ],
     );
   }
 }

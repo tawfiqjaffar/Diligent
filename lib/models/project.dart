@@ -97,8 +97,34 @@ class Project {
     return true;
   }
 
-  // Project.fromJson(Map<String, dynamic> json)
-  //     : label = json['label'],
-  //       id = json['id'],
-  //       activities = json['activities'];
+  static List<Project> filterFinishedProjects(List<Project> projectList) {
+    List<Project> result = [];
+    projectList.forEach((project) {
+      bool hasOngoingActivity = false;
+      for (var activity in project.activities) {
+        if (activity.end == null) {
+          hasOngoingActivity = true;
+        }
+      }
+      if (!hasOngoingActivity) {
+        result.add(project);
+      }
+    });
+    print(result.toString());
+    return result;
+  }
+
+  static List<Activity> filterOngoingActivities(List<Project> projectList) {
+    List<Activity> result = [];
+
+    projectList.forEach((project) {
+      project.activities.forEach((act) {
+        if (act.end == null) {
+          result.add(act);
+        }
+      });
+    });
+
+    return result;
+  }
 }

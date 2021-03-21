@@ -124,14 +124,6 @@ class _CreateProjectState extends State<CreateProject>
 
   @override
   void saveProject(Project project) {
-    // TODO: implement saveProject
-    // var listFromMemory = UserDefaults.getStringList(Storage.projects);
-    // if (listFromMemory == null) {
-    //   listFromMemory = [];
-    // }
-
-    // listFromMemory.add(json.encode(project.toJson()));
-    // UserDefaults.setStringList(Storage.projects, listFromMemory);
     Project.saveProject(project);
     testUserDefaults(project);
     Navigator.of(context).pop();

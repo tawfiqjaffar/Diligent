@@ -1,11 +1,34 @@
 import 'package:Diligent/config/palette.dart';
 import 'package:Diligent/config/style.dart';
+import 'package:Diligent/models/project.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'widgets.dart';
 
 class DashboardStats extends StatelessWidget {
+  final List<Project> projectList = Project.readFromMemory();
+
+  List<List<String>> getStats() {
+    List<List<String>> stats = [];
+
+    // finished projects
+    List<Project> finishedProj = Project.filterFinishedProjects(projectList);
+    stats.add(["Acquired skills", finishedProj.length.toString()]);
+
+    // ongoing proects
+
+    int ongoing = projectList.length - finishedProj.length;
+    stats.add(["Ongoing projects", ongoing.toString()]);
+
+    // number of activities
+
+    int numberOfAct = Project.filterOngoingActivities(projectList).length;
+    stats.add(["Ongoing activities", numberOfAct.toString()]);
+
+    return stats;
+  }
+
   @override
   Widget build(BuildContext context) {
     final double itemHeightWidth = 160;
@@ -29,9 +52,11 @@ class DashboardStats extends StatelessWidget {
                     isFirst: index == 0,
                     isLast: index == 2,
                     dimension: itemHeightWidth,
+                    title: getStats()[index][0],
+                    content: getStats()[index][1],
                   );
                 },
-                itemCount: 3,
+                itemCount: getStats().length,
                 separatorBuilder: (BuildContext context, int index) {
                   return SizedBox(width: 8.0);
                 },
@@ -48,12 +73,16 @@ class _ListItem extends StatelessWidget {
   final bool isFirst;
   final bool isLast;
   final double dimension;
+  final String title;
+  final String content;
 
   const _ListItem({
     Key key,
     @required this.isFirst,
     @required this.isLast,
     @required this.dimension,
+    @required this.title,
+    @required this.content,
   }) : super(key: key);
 
   @override
@@ -86,7 +115,7 @@ class _ListItem extends StatelessWidget {
               Flexible(
                 flex: 1,
                 child: Text(
-                  "Stat title",
+                  title,
                   style: const TextStyle(
                       color: Colors.white, fontWeight: FontWeight.bold),
                 ),
@@ -96,7 +125,7 @@ class _ListItem extends StatelessWidget {
                 child: Container(
                   height: double.infinity,
                   child: Text(
-                    "Stat title",
+                    content,
                     style: const TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,

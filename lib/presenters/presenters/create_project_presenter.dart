@@ -1,4 +1,3 @@
-import 'package:Diligent/models/activity.dart';
 import 'package:Diligent/models/project.dart';
 import 'package:Diligent/presenters/delegates/create_project_delegate.dart';
 import 'package:Diligent/presenters/delegates/delegate.dart';
@@ -16,13 +15,7 @@ class CreateProjectPresenter implements Presenter {
     if (name.isEmpty) {
       delegate.showAlertDialog("Error", "Project name cannot be empty");
     } else {
-      final project = Project(label: name, id: uuid.v1(), activities: [
-        Activity(
-            id: uuid.v1(),
-            projectId: Uuid().v1(),
-            label: "${name} act",
-            start: DateTime.now())
-      ]);
+      final project = Project(label: name, id: uuid.v1(), activities: []);
 
       delegate?.saveProject(project);
     }
